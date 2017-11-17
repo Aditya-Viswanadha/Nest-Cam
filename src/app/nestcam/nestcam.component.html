@@ -1,0 +1,24 @@
+<h1>{{cameraName}}</h1>
+
+<div *ngIf="isStreaming">
+
+  <iframe type="text/html" frameborder="0" width="890" height="500" src="//video.nest.com/embedded/live/rrwzgV?autoplay=1"
+    allowfullscreen></iframe>
+
+</div>
+
+<p-dataTable #dt [value]="Events" class="ui-g-12" sortField="eventDate" sortOrder="-1" emptyMessage="No event entries found"
+[reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="true" [globalFilter]="tableSearch" exportFilename="events"
+[editable]="true"  [(selection)]="selectedRows" 
+[contextMenu]="tableContextMenu" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,15,20,25]" 
+[pageLinks]="8">
+<p-column field="cameraid" header="Cam_id" [editable]="false"></p-column>
+<p-column field="cameraName" header="Cam_Name" [editable]="false"></p-column>
+<p-column field="eventDate" header="Event_Date" [sortable]="true">
+    <ng-template pTemplate="body" let-h="rowData">
+        {{h.eventDate | date:'short'}}
+    </ng-template>
+</p-column>
+</p-dataTable>
+
+<p-contextMenu #tableContextMenu></p-contextMenu>
